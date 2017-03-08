@@ -1,0 +1,41 @@
+body,html{margin:0px}
+#b{width:70%;padding-left:15%;padding-right:15%;background-color:#333333;}
+#arriba{width:100%;height:300px;top:0%;background-color:#A6A293;}
+body,input,select,label{font-size:3vw;background-color:#A6A293;}
+h3{font-size:4vw}
+input,select{width:50%}
+input[type=checkbox]{width:5%;}
+input[type=radio]{width:5%;}
+form{position:relative;top:60px;background-color:#a6a293;padding:3%; border: 2px solid black;}
+#divlogo{text-align:center;}
+#divlogo{position:relative;height:62%;}
+#instrucciones{top:55%;position:fixed;height:50%;width:100%;left:0%;background-color:#d0d0d0; border: 1px solid black;}
+p{
+	text-align:center;
+	font-size:3.5vw;
+}
+
+
+
+ul {
+    list-style-type: none;
+    margin: 30;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333333;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 16px;
+    text-decoration: none;
+}
+
+#resultados{
+position:relative;
+top:50px;
+background-color:#A6A293;
+border: 2px solid black;
+}
