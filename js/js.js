@@ -40,7 +40,7 @@ window.onload = function () {
             gestionarXml(this);
         }
     };
-    xhttp.open("GET", "https://rawgit.com/PedroAmat/Formulario/master/Formulario/XML/PreguntasXML.xml", true);
+    xhttp.open("GET", "https://rawgit.com/jimenopro/Formulario/master/xml/PreguntasXML.xml", true);
     xhttp.send();
 }
 
