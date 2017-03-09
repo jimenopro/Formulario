@@ -18,17 +18,17 @@ window.onload = function () {
     formElement.onsubmit = function () {
         inicializar();
         if (comprobar()) {
-            corregirRadio1();
-            corregirText1();
-            corregirCheckbox1();
-            corregirSelect1();
-            corregirMultiple1();
-            corregirText2();
-            corregirMultiple2();
-            corregirRadio2();
-            corregirSelect2();
-            corregirCheckbox2();
-            presentarNota();
+            corRadio1();
+            corText1();
+            corCheckbox1();
+            corSelect1();
+            corMultiple1();
+            corText2();
+            corMultiple2();
+            corRadio2();
+            corSelect2();
+            corCheckbox2();
+            nota();
         }
         return false;
     };
@@ -280,7 +280,7 @@ function ponerDatosCheckboxHtml2(t, opt) {
 
 //****************************************************************************************************
 //Correccion
-function corregirRadio1() {
+function corRadio1() {
     var f = formElement;
     var escorrecta = [];
     for (i = 0; i < f.rio.length; i++) {
@@ -302,7 +302,7 @@ function corregirRadio1() {
     }
 }
 
-function corregirRadio2() {
+function corRadio2() {
     var f = formElement;
     var escorrecta = [];
     for (i = 0; i < f.capital.length; i++) {
@@ -324,7 +324,7 @@ function corregirRadio2() {
     }
 }
 
-function corregirText1() {
+function corText1() {
     var t = document.getElementById("text1").value;
     var s = t.toUpperCase();
     var res = respuestaText1.toUpperCase();
@@ -337,7 +337,7 @@ function corregirText1() {
     }
 }
 
-function corregirText2() {
+function corText2() {
     var t = document.getElementById("text2").value;
     var s = t.toUpperCase();
     var res = respuestaText2.toUpperCase();
@@ -350,7 +350,7 @@ function corregirText2() {
     }
 }
 
-function corregirSelect1() {
+function corSelect1() {
     var sel = formElement.elements[9];
     if (sel.selectedIndex == respuestaSelect1) {
         darRespuestaHtml("Pregunta 4: Correcto");
@@ -359,7 +359,7 @@ function corregirSelect1() {
         darRespuestaHtml("Pregunta 4: Incorrecto");
 }
 
-function corregirSelect2() {
+function corSelect2() {
     var sel = formElement.elements[17];
     if (sel.selectedIndex == respuestaSelect2) {
         darRespuestaHtml("Pregunta 9: Correcto");
@@ -368,7 +368,7 @@ function corregirSelect2() {
         darRespuestaHtml("Pregunta 9: Incorrecto");
 }
 
-function corregirCheckbox1() {
+function corCheckbox1() {
     var f = formElement;
     var escorrecta = [];
     for (i = 0; i < f.isla.length; i++) {
@@ -390,7 +390,7 @@ function corregirCheckbox1() {
     }
 }
 
-function corregirCheckbox2() {
+function corCheckbox2() {
     var f = formElement;
     var escorrecta = [];
     for (i = 0; i < f.ralph.length; i++) {
@@ -412,7 +412,7 @@ function corregirCheckbox2() {
     }
 }
 
-function corregirMultiple1() {
+function corMultiple1() {
     var mul = document.getElementsByClassName("opmult1");
     var escorrecta = [];
     for (i = 0; i < mul.length; i++) {
@@ -434,7 +434,7 @@ function corregirMultiple1() {
     }
 }
 
-function corregirMultiple2() {
+function corMultiple2() {
     var mul = document.getElementsByClassName("opmult2");
     var escorrecta = [];
     for (i = 0; i < mul.length; i++) {
@@ -465,9 +465,15 @@ function darRespuestaHtml(r) {
     document.getElementById('resultados').appendChild(p);
 }
 
-function presentarNota() {
-    darRespuestaHtml("Nota: " + nota + " puntos sobre 10");
+function nota() {
+
+    if(nota>9,5){
+    darRespuestaHtml("Nota: " + nota + " sobre 10, no se puede ser perfecto, maki");
+    }
+    else{darRespuestaHtml("Nota: " + nota + " sobre 10");}
 }
+
+
 
 function inicializar() {
     document.getElementById('resultados').innerHTML = "";
