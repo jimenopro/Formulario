@@ -72,13 +72,29 @@ function gestionarXml(dadesXml) {
         respuestasRadio2[i] = xmlDoc.getElementById("p08").getElementsByTagName("answer")[i].innerHTML;
     }
 
-    //INPUT TEXT
-    var tituloText1 = xmlDoc.getElementsByTagName("title")[1].innerHTML;
-    var tituloText2 = xmlDoc.getElementsByTagName("title")[5].innerHTML;
-    ponerDatosTextHtml1(tituloText1);
-    ponerDatosTextHtml2(tituloText2);
-    respuestaText1 = String(xmlDoc.getElementsByTagName("answer")[1].innerHTML);
-    respuestaText2 = String(xmlDoc.getElementsByTagName("answer")[7].innerHTML);
+    //CHECKBOX
+    var tituloCheckbox1 = xmlDoc.getElementsByTagName("title")[2].innerHTML;
+    var tituloCheckbox2 = xmlDoc.getElementsByTagName("title")[9].innerHTML;
+    var opcionesCheckbox1 = [];
+    var opcionesCheckbox2 = [];
+    var noptc1 = xmlDoc.getElementById("p03").getElementsByTagName('option').length;
+    var noptc2 = xmlDoc.getElementById("p10").getElementsByTagName('option').length;
+    for (i = 0; i < noptc1; i++) {
+        opcionesCheckbox1[i] = xmlDoc.getElementById("p03").getElementsByTagName('option')[i].innerHTML;
+    }
+    for (i = 0; i < noptc2; i++) {
+        opcionesCheckbox2[i] = xmlDoc.getElementById("p10").getElementsByTagName('option')[i].innerHTML;
+    }
+    ponerDatosCheckboxHtml1(tituloCheckbox1, opcionesCheckbox1);
+    ponerDatosCheckboxHtml2(tituloCheckbox2, opcionesCheckbox2);
+    var nresc1 = xmlDoc.getElementById("p03").getElementsByTagName('answer').length;
+    var nresc2 = xmlDoc.getElementById("p10").getElementsByTagName('answer').length;
+    for (i = 0; i < nresc1; i++) {
+        respuestasCheckbox1[i] = xmlDoc.getElementById("p03").getElementsByTagName("answer")[i].innerHTML;
+    }
+    for (i = 0; i < nresc2; i++) {
+        respuestasCheckbox2[i] = xmlDoc.getElementById("p10").getElementsByTagName("answer")[i].innerHTML;
+    }
 
     //SELECT
     var tituloSelect1 = xmlDoc.getElementsByTagName("title")[3].innerHTML;
@@ -122,28 +138,143 @@ function gestionarXml(dadesXml) {
         respuestasMultiple2[i] = xmlDoc.getElementById("p07").getElementsByTagName("answer")[i].innerHTML;
     }
 
-    //CHECKBOX
-    var tituloCheckbox1 = xmlDoc.getElementsByTagName("title")[2].innerHTML;
-    var tituloCheckbox2 = xmlDoc.getElementsByTagName("title")[9].innerHTML;
-    var opcionesCheckbox1 = [];
-    var opcionesCheckbox2 = [];
-    var noptc1 = xmlDoc.getElementById("p03").getElementsByTagName('option').length;
-    var noptc2 = xmlDoc.getElementById("p10").getElementsByTagName('option').length;
-    for (i = 0; i < noptc1; i++) {
-        opcionesCheckbox1[i] = xmlDoc.getElementById("p03").getElementsByTagName('option')[i].innerHTML;
+
+    //INPUT TEXT
+    var tituloText1 = xmlDoc.getElementsByTagName("title")[1].innerHTML;
+    var tituloText2 = xmlDoc.getElementsByTagName("title")[5].innerHTML;
+    ponerDatosTextHtml1(tituloText1);
+    ponerDatosTextHtml2(tituloText2);
+    respuestaText1 = String(xmlDoc.getElementsByTagName("answer")[1].innerHTML);
+    respuestaText2 = String(xmlDoc.getElementsByTagName("answer")[7].innerHTML);
+
+    
+}
+
+//****************************************************************************************************
+// poner datos
+function ponerDatosRadioHtml1(t, opt) {
+    var radioContainer = document.getElementById('radioDiv1');
+    document.getElementById('tituloRadio1').innerHTML = t;
+    for (i = 0; i < opt.length; i++) {
+        var input = document.createElement("input");
+        var label = document.createElement("label");
+        label.innerHTML = opt[i];
+        label.setAttribute("for", "respuesta_" + i);
+        input.type = "radio";
+        input.name = "rio";
+        input.id = "rio_" + i;
+        ;
+        radioContainer.appendChild(input);
+        radioContainer.appendChild(label);
+        radioContainer.appendChild(document.createElement("br"));
     }
-    for (i = 0; i < noptc2; i++) {
-        opcionesCheckbox2[i] = xmlDoc.getElementById("p10").getElementsByTagName('option')[i].innerHTML;
+}
+
+function ponerDatosRadioHtml2(t, opt) {
+    var radioContainer = document.getElementById('radioDiv2');
+    document.getElementById('tituloRadio2').innerHTML = t;
+    for (i = 0; i < opt.length; i++) {
+        var input = document.createElement("input");
+        var label = document.createElement("label");
+        label.innerHTML = opt[i];
+        label.setAttribute("for", "respuesta_" + i);
+        input.type = "radio";
+        input.name = "capital";
+        input.id = "capital_" + i;
+        ;
+        radioContainer.appendChild(input);
+        radioContainer.appendChild(label);
+        radioContainer.appendChild(document.createElement("br"));
     }
-    ponerDatosCheckboxHtml1(tituloCheckbox1, opcionesCheckbox1);
-    ponerDatosCheckboxHtml2(tituloCheckbox2, opcionesCheckbox2);
-    var nresc1 = xmlDoc.getElementById("p03").getElementsByTagName('answer').length;
-    var nresc2 = xmlDoc.getElementById("p10").getElementsByTagName('answer').length;
-    for (i = 0; i < nresc1; i++) {
-        respuestasCheckbox1[i] = xmlDoc.getElementById("p03").getElementsByTagName("answer")[i].innerHTML;
+}
+
+function ponerDatosTextHtml1(t) {
+    document.getElementById("tituloText1").innerHTML = t;
+}
+
+function ponerDatosTextHtml2(t) {
+    document.getElementById("tituloText2").innerHTML = t;
+}
+
+function ponerDatosSelectHtml1(t, opt) {
+    document.getElementById("tituloSelect1").innerHTML = t;
+    var select = document.getElementById("select1");
+    for (i = 0; i < opt.length; i++) {
+        var option = document.createElement("option");
+        option.text = opt[i];
+        option.value = i + 1;
+        select.options.add(option);
     }
-    for (i = 0; i < nresc2; i++) {
-        respuestasCheckbox2[i] = xmlDoc.getElementById("p10").getElementsByTagName("answer")[i].innerHTML;
+}
+
+function ponerDatosSelectHtml2(t, opt) {
+    document.getElementById("tituloSelect2").innerHTML = t;
+    var select = document.getElementById("select2");
+    for (i = 0; i < opt.length; i++) {
+        var option = document.createElement("option");
+        option.text = opt[i];
+        option.value = i + 1;
+        select.options.add(option);
+    }
+}
+
+function ponerDatosMultipleHtml1(t, opt) {
+    document.getElementById("tituloMultiple1").innerHTML = t;
+    var multiple = document.getElementById("multiple1");
+    for (i = 0; i < opt.length; i++) {
+        var option = document.createElement("option");
+        option.text = opt[i];
+        option.value = i + 1;
+        option.className = "opmult1";
+        multiple.options.add(option);
+    }
+}
+
+function ponerDatosMultipleHtml2(t, opt) {
+    document.getElementById("tituloMultiple2").innerHTML = t;
+    var multiple = document.getElementById("multiple2");
+    for (i = 0; i < opt.length; i++) {
+        var option = document.createElement("option");
+        option.text = opt[i];
+        option.value = i + 1;
+        option.className = "opmult2";
+        multiple.options.add(option);
+    }
+}
+
+function ponerDatosCheckboxHtml1(t, opt) {
+    var checkboxContainer = document.getElementById('checkboxDiv1');
+    document.getElementById('tituloCheckbox1').innerHTML = t;
+    for (i = 0; i < opt.length; i++) {
+        var input = document.createElement("input");
+        var label = document.createElement("label");
+        label.innerHTML = opt[i];
+        label.setAttribute("for", "isla_" + i);
+        input.type = "checkbox";
+        input.name = "isla";
+        input.id = "isla_" + i;
+        ;
+        checkboxContainer.appendChild(input);
+        checkboxContainer.appendChild(label);
+        checkboxContainer.appendChild(document.createElement("br"));
+    }
+}
+
+function ponerDatosCheckboxHtml2(t, opt) {
+    var checkboxContainer = document.getElementById('checkboxDiv2');
+    document.getElementById('tituloCheckbox2').innerHTML = t;
+    for (i = 0; i < opt.length; i++) {
+        var input = document.createElement("input");
+        var label = document.createElement("label");
+        label.innerHTML = opt[i];
+        label.setAttribute("for", "ralph_" + i);
+        input.type = "checkbox";
+        input.name = "ralph";
+        input.id = "ralph_" + i;
+        ;
+        checkboxContainer.appendChild(input);
+        checkboxContainer.appendChild(label);
+        checkboxContainer.appendChild(document.createElement("br"));
     }
 }
 
@@ -322,134 +453,6 @@ function corregirMultiple2() {
                 darRespuestaHtml("Pregunta 7: " + (i + 1) + " incorrecta");
             }
         }
-    }
-}
-
-//****************************************************************************************************
-// poner datos
-function ponerDatosRadioHtml1(t, opt) {
-    var radioContainer = document.getElementById('radioDiv1');
-    document.getElementById('tituloRadio1').innerHTML = t;
-    for (i = 0; i < opt.length; i++) {
-        var input = document.createElement("input");
-        var label = document.createElement("label");
-        label.innerHTML = opt[i];
-        label.setAttribute("for", "respuesta_" + i);
-        input.type = "radio";
-        input.name = "rio";
-        input.id = "rio_" + i;
-        ;
-        radioContainer.appendChild(input);
-        radioContainer.appendChild(label);
-        radioContainer.appendChild(document.createElement("br"));
-    }
-}
-
-function ponerDatosRadioHtml2(t, opt) {
-    var radioContainer = document.getElementById('radioDiv2');
-    document.getElementById('tituloRadio2').innerHTML = t;
-    for (i = 0; i < opt.length; i++) {
-        var input = document.createElement("input");
-        var label = document.createElement("label");
-        label.innerHTML = opt[i];
-        label.setAttribute("for", "respuesta_" + i);
-        input.type = "radio";
-        input.name = "capital";
-        input.id = "capital_" + i;
-        ;
-        radioContainer.appendChild(input);
-        radioContainer.appendChild(label);
-        radioContainer.appendChild(document.createElement("br"));
-    }
-}
-
-function ponerDatosTextHtml1(t) {
-    document.getElementById("tituloText1").innerHTML = t;
-}
-
-function ponerDatosTextHtml2(t) {
-    document.getElementById("tituloText2").innerHTML = t;
-}
-
-function ponerDatosSelectHtml1(t, opt) {
-    document.getElementById("tituloSelect1").innerHTML = t;
-    var select = document.getElementById("select1");
-    for (i = 0; i < opt.length; i++) {
-        var option = document.createElement("option");
-        option.text = opt[i];
-        option.value = i + 1;
-        select.options.add(option);
-    }
-}
-
-function ponerDatosSelectHtml2(t, opt) {
-    document.getElementById("tituloSelect2").innerHTML = t;
-    var select = document.getElementById("select2");
-    for (i = 0; i < opt.length; i++) {
-        var option = document.createElement("option");
-        option.text = opt[i];
-        option.value = i + 1;
-        select.options.add(option);
-    }
-}
-
-function ponerDatosMultipleHtml1(t, opt) {
-    document.getElementById("tituloMultiple1").innerHTML = t;
-    var multiple = document.getElementById("multiple1");
-    for (i = 0; i < opt.length; i++) {
-        var option = document.createElement("option");
-        option.text = opt[i];
-        option.value = i + 1;
-        option.className = "opmult1";
-        multiple.options.add(option);
-    }
-}
-
-function ponerDatosMultipleHtml2(t, opt) {
-    document.getElementById("tituloMultiple2").innerHTML = t;
-    var multiple = document.getElementById("multiple2");
-    for (i = 0; i < opt.length; i++) {
-        var option = document.createElement("option");
-        option.text = opt[i];
-        option.value = i + 1;
-        option.className = "opmult2";
-        multiple.options.add(option);
-    }
-}
-
-function ponerDatosCheckboxHtml1(t, opt) {
-    var checkboxContainer = document.getElementById('checkboxDiv1');
-    document.getElementById('tituloCheckbox1').innerHTML = t;
-    for (i = 0; i < opt.length; i++) {
-        var input = document.createElement("input");
-        var label = document.createElement("label");
-        label.innerHTML = opt[i];
-        label.setAttribute("for", "isla_" + i);
-        input.type = "checkbox";
-        input.name = "isla";
-        input.id = "isla_" + i;
-        ;
-        checkboxContainer.appendChild(input);
-        checkboxContainer.appendChild(label);
-        checkboxContainer.appendChild(document.createElement("br"));
-    }
-}
-
-function ponerDatosCheckboxHtml2(t, opt) {
-    var checkboxContainer = document.getElementById('checkboxDiv2');
-    document.getElementById('tituloCheckbox2').innerHTML = t;
-    for (i = 0; i < opt.length; i++) {
-        var input = document.createElement("input");
-        var label = document.createElement("label");
-        label.innerHTML = opt[i];
-        label.setAttribute("for", "ralph_" + i);
-        input.type = "checkbox";
-        input.name = "ralph";
-        input.id = "ralph_" + i;
-        ;
-        checkboxContainer.appendChild(input);
-        checkboxContainer.appendChild(label);
-        checkboxContainer.appendChild(document.createElement("br"));
     }
 }
 
